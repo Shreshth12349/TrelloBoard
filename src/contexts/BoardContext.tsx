@@ -8,7 +8,7 @@ type BoardContextType = {
     createTask: (columnId: string | number) => void;
     deleteColumn: (id: string | number) => void;
     updateColumn: (id: string | number, newTitle: string) => void;
-    deleteTask: (taskId: string | number) => void;
+    deleteTask: (taskId: string | number | undefined) => void;
     setColumns: React.Dispatch<React.SetStateAction<Column[]>>;
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };

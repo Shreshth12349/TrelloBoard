@@ -12,7 +12,7 @@ export default function ColumnSelectMenu({ taskId }: { taskId: string | number |
 
     const currentColumn = columns.find((col) => col.id === activeTask?.columnId) || null;
 
-    const handleColumnChange = (newColumnId: string | number | null) => {
+    const handleColumnChange = (newColumnId: string | number | undefined) => {
         if (newColumnId) {
             setTasks((prevTasks) =>
                 prevTasks.map((task) =>
@@ -25,7 +25,7 @@ export default function ColumnSelectMenu({ taskId }: { taskId: string | number |
     return (
         <Listbox
             value={currentColumn}
-            onChange={(newColumn) => handleColumnChange(newColumn.id)}
+            onChange={(newColumn) => handleColumnChange(newColumn?.id)}
         >
             <div className="relative mt-2">
                 <ListboxButton className="grid w-full cursor-default grid-cols-1 rounded-md bg-gray-600 py-1.5 pl-3 pr-2 text-left text-white sm:text-sm">
