@@ -15,50 +15,16 @@ import {
 import {arrayMove, SortableContext} from "@dnd-kit/sortable";
 import {createPortal} from "react-dom";
 import TaskCard from "./TaskCard.tsx";
+import {useBoard} from "../contexts/BoardContext.tsx";
 
 export default function ProjectsBoard () {
-
-    const [columns, setColumns] = useState<Column[]>([])
-    const [tasks, setTasks] = useState<Task[]>([])
+    //
+    // const [columns, setColumns] = useState<Column[]>([])
+    // const [tasks, setTasks] = useState<Task[]>([])
+    const {tasks, setTasks, createTask, deleteTask, deleteColumn, updateColumn, setColumns, columns, createNewColumn} = useBoard()
 
     // const columnsId = useMemo(() => columns.map((col) => col.id), [columns])
 
-    function generateId () {
-        return Math.floor(Math.random() * 10001)
-    }
-
-    const createNewColumn = () => {
-        const columnToAdd: Column = {
-            id: generateId(),
-            title: `Column ${columns.length+1}`
-        }
-        setColumns([...columns, columnToAdd])
-        console.dir(columns)
-    }
-
-    const createTask = (columnId: string | number) => {
-        setTasks([...tasks, {id: generateId(), columnId, content: `Task ${tasks.length+1}`}])
-    }
-
-    const deleteColumn = (id: string | number) => {
-        const filteredColumns = columns.filter((column) => column.id !== id)
-        setTasks(tasks.filter(task => task.columnId !== id))
-        setColumns(filteredColumns)
-    }
-
-    const updateColumn = (id: string | number, newTitle: string)=>  {
-        setColumns(columns.map(column => {
-            if (id == column.id) {
-                column.title = newTitle;
-                return column;
-            }
-            return column
-        }))
-    }
-
-    const deleteTask = (taskId: string | number) => {
-        setTasks(tasks.filter(task => taskId !== task.id))
-    }
 
     const [activeColumn, setActiveColumn] = useState<Column | null>()
     const [activeTask, setActiveTask] = useState<Task | null>()

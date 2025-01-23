@@ -6,5 +6,6 @@ export interface Column {
 export interface Task {
     id: string | number
     columnId: string | number
-    content: string
+    title: string
+    description: string
 }

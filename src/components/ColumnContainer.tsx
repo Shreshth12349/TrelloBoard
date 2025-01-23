@@ -44,12 +44,13 @@ export default function ColumnContainer ({column, deleteColumn, updateColumn, cr
                 className={'text-center flex flex-row gap-4 items-center justify-between bg-black text-md h-[60px] cursor-grab rounded-md rounded-b-none p-3 font-bold border-gray-900 border-4'}>
                 <div className={'flex gap-4 items-center'}>
                     <div className={'flex justify-center items-center bg-gray-800 px-2 py-1 text-sm rounded-full'}>{tasks.length}</div>
-                    {!editMode && column.title}
-                    {editMode && <input type={'text'} autoFocus={true} onBlur={() => setEditMode(false)} className={'bg-black focus:border-rose-500 border-opacity-70 border  rounded-sm outline-none px-2'} value={column.title} onChange={(e) => updateColumn(column.id, e.target.value)}/>}
+                    {!editMode && (column.title.trim() !== '' ? column.title : <div className={'text-gray-500 text-sm text-opacity-70'}>No label provided</div>)}
+                    {editMode && <input type={'text'} placeholder={'Enter a label'} autoFocus={true} onBlur={() => setEditMode(false)} className={'bg-black focus:border-rose-500 p-1 rounded-md border-opacity-70 border outline-none px-2'} value={column.title} onChange={(e) => updateColumn(column.id, e.target.value)}/>}
                 </div>
-                <button  onClick={() => deleteColumn(column.id)}>
+                <button  className={'active:scale-95'} onClick={() => deleteColumn(column.id)}>
                     <TrashIcon className={'stroke-gray-600  h-6 w-6'} />
                 </button>
+
             </div>
             <div className={'flex flex-grow flex-col gap-1 p-2 overflow-x-hidden overflow-y-auto'}>
                 <SortableContext items={tasks}>
@@ -60,8 +61,8 @@ export default function ColumnContainer ({column, deleteColumn, updateColumn, cr
             </div>
             <div className={'flex items-center justify-center'}>
                 <button onClick={() => createTask(column.id)} className={'text-center bg-blue-900 bg-opacity-40 hover:text-rose-300 hover:bg-gray-800 p-1 transition-all active:scale-95 flex flex-row items-center justify-center gap-2 w-full m-1 rounded-md text'}>
-                    <div>Add Task</div>
-                    <PlusIcon className={'h-5 w-5 stroke-2'}/>
+                    <div className={'text-sm font-semibold'}>New</div>
+                    <PlusIcon className={'h-4 w-4 stroke-2'}/>
                 </button>
             </div>
         </div>
