@@ -3,7 +3,7 @@ import ProjectsPage from "./pages/ProjectsPage.tsx";
 
 const router = createBrowserRouter([
     {
-        path: '/projects',
+        path: '/',
         element: <ProjectsPage/>
     },
 ])
